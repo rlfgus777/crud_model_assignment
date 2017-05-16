@@ -1,0 +1,12 @@
+<h1> Personnel board </h1>
+
+<a href="/board/new">write</a> <hr>
+
+<% @allBoard.each do |q| %>
+    number : <%= q.id %><br>
+    <a href="/show/<%= q.id %>">Title : <%= q.dbTitle %> </a><br>
+    Editor : <%= q.dbEditor %><br>
+    Content : <%= q.dbContent %><br>
+    <hr>
+    
+<% end %>

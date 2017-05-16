@@ -1,0 +1,12 @@
+class CreateReplies < ActiveRecord::Migration
+  def change
+    create_table :replies do |t|
+      
+      t.integer :post_id
+      t.string :dbName
+      t.text :dbComment
+      
+      t.timestamps null: false
+    end
+  end
+end

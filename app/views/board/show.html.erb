@@ -1,0 +1,27 @@
+<h1> Show </h1>
+
+
+Title : <%= @showBoard.dbTitle %> <br>
+Editor : <%= @showBoard.dbEditor %> <br>
+Content : <%= @showBoard.dbContent %> <br><br>
+
+<a href="/edit/<%= @showBoard.id %>">[Modify]</a>
+<a href="/destroy/<%= @showBoard.id %>">[Delete]</a>
+<br>
+<a href="/">go home!!</a>
+
+
+<% @showBoard.replies.each do |p| %>
+    editor : <%= p.dbName %><br>
+    comment : <%= p.dbComment %><br>
+    <a href="/comment_destroy/<%= p.id %>">[delete]</a>
+<% end %>
+
+
+<form action="/comment_create" method="POST">
+    <input type="hidden" name="reply_id" value="<%= @showBoard.id %>">
+    editor : <input type="string" name="inputName">
+    comment : <input type="text" name="inputComment">
+    <input type="submit" value="comment">
+</form>
+
