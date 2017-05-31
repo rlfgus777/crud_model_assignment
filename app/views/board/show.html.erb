@@ -4,23 +4,35 @@
 Title : <%= @showBoard.dbTitle %> <br>
 Editor : <%= @showBoard.dbEditor %> <br>
 Content : <%= @showBoard.dbContent %> <br><br>
+image : <img src="<%= @showBoard.image_url %>"><br><br>
 
 <a href="/edit/<%= @showBoard.id %>">[Modify]</a>
 <a href="/destroy/<%= @showBoard.id %>">[Delete]</a>
 <br>
-<a href="/">go home!!</a>
+<a href="/">go home!!</a><hr>
 
 
 <% @showBoard.replies.each do |p| %>
+    
     editor : <%= p.dbName %><br>
+    
+    
     comment : <%= p.dbComment %><br>
+    
     <a href="/comment_destroy/<%= p.id %>">[delete]</a>
+    <hr>
 <% end %>
 
 
 <form action="/comment_create" method="POST">
     <input type="hidden" name="reply_id" value="<%= @showBoard.id %>">
+    
+    <% if user_signed_in? %>
+    editor : <input type="string" name="inputName" value="<%= current_user.email %>" readonly="readonly">
+    <% else %>
     editor : <input type="string" name="inputName">
+    <% end %>
+    
     comment : <input type="text" name="inputComment">
     <input type="submit" value="comment">
 </form>

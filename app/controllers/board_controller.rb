@@ -1,9 +1,13 @@
 class BoardController < ApplicationController
+  
+  before_action :authenticate_user!, except: [:index, :show]
+  
+  def index
     
-    def index
     
-    @allBoard = Post.all
+      @allBoard = Post.all.reverse
     
+
   end
 
   def show
@@ -27,13 +31,23 @@ class BoardController < ApplicationController
   
   def create
   
+   require 'carrierwave/orm/activerecord'
+    
     @makeBoard = Post.new
     @makeBoard.dbTitle = params[:inputTitle]
     @makeBoard.dbEditor = params[:inputEditor]
     @makeBoard.dbContent = params[:inputContent]
+    @makeBoard.photos = params[:file]
+    @makeBoard.user = current_user
+    
+    u = PhotoUploader.new
+    u.store!(params[:inputImage])
+    @makeBoard.image_url = u
+    # @makeBoard.photo_identifier
     @makeBoard.save
     
     redirect_to '/index'
+    
     
   
   end

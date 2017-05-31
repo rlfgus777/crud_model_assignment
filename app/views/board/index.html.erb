@@ -1,6 +1,14 @@
 <h1> Personnel board </h1>
 
+<% if user_signed_in? %>
+    <%= current_user.email %>
+    <a href="/users/sign_out">로그아웃</a>
+<% else %>
+    <a href="/users/sign_in">로그인</a>
+<% end %>
+<br>
 <a href="/board/new">write</a> <hr>
+
 
 <% @allBoard.each do |q| %>
     number : <%= q.id %><br>

@@ -1,10 +1,11 @@
 <h1> New </h1>
 
-<form action="/create" method="POST">
+<form action="/create" method="POST" enctype="multipart/form-data">
     <br>
 <input type="text" name="inputTitle" placeholder="Title"><br><br>
-<input type="text" name="inputEditor" placeholder="Editor"><br><br>
+<input type="text" name="inputEditor" value="<%= current_user.email %>" readonly="readonly"><br><br>
 <input type="text" name="inputContent" placeholder="Content"><br><br>
+<input type="file" name="inputImage" accept="image/*"> 
 <input type="submit" value="Submit">
 
 
